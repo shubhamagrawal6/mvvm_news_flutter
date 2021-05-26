@@ -6,7 +6,9 @@ import 'package:mvvm_news_flutter/viewmodels/news_articles_vm.dart';
 enum LoadingStatus { completed, searching, empty }
 
 class NewsArticleListViewModel with ChangeNotifier {
-  List<NewsArticleViewModel> articles = List.empty();
+  List<NewsArticleViewModel> articles = List.empty(
+    growable: true,
+  );
   LoadingStatus loadingStatus = LoadingStatus.empty;
 
   void topHeadlines() async {
