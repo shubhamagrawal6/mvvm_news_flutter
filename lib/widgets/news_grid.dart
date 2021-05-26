@@ -1,6 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mvvm_news_flutter/viewmodels/news_articles_vm.dart';
+import 'package:mvvm_news_flutter/widgets/circle_image.dart';
 
 class NewsGrid extends StatelessWidget {
   final List<NewsArticleViewModel> articles;
@@ -15,8 +15,25 @@ class NewsGrid extends StatelessWidget {
       itemBuilder: (context, index) {
         return GridTile(
           child: Container(
-            child: CachedNetworkImage(
-              imageUrl: this.articles[index].urlToImage,
+            margin: EdgeInsets.symmetric(
+              horizontal: 10,
+              vertical: 20,
+            ),
+            child: CircleImage(
+              imageUrl: articles[index].urlToImage,
+            ),
+          ),
+          footer: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: 15,
+            ),
+            child: Text(
+              articles[index].title,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         );
