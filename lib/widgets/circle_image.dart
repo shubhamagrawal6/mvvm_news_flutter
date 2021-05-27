@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class CircleImage extends StatelessWidget {
   final imageUrl;
 
-  const CircleImage({this.imageUrl});
+  const CircleImage({@required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
