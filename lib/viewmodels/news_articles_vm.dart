@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:mvvm_news_flutter/models/newsarticle.dart';
 
 class NewsArticleViewModel {
@@ -28,7 +29,9 @@ class NewsArticleViewModel {
   }
 
   String get publishedAt {
-    return _newsarticle.publishedAt;
+    final dateTime = DateFormat('yyyy-mm-ddTHH:mm:ssZ')
+        .parse(_newsarticle.publishedAt, true);
+    return DateFormat.yMMMMEEEEd('en-us').format(dateTime).toString();
   }
 
   String get content {
