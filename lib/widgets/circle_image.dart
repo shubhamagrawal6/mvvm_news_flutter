@@ -27,7 +27,7 @@ class CircleImage extends StatelessWidget {
         );
       },
       errorWidget: (context, url, error) {
-        return Container();
+        return Icon(Icons.error);
       },
     );
   }

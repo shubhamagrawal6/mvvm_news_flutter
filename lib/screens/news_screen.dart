@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mvvm_news_flutter/constants.dart';
 import 'package:mvvm_news_flutter/models/newsarticlelist.dart';
 import 'package:mvvm_news_flutter/widgets/news_grid.dart';
 import 'package:provider/provider.dart';
@@ -9,6 +10,7 @@ class NewsScreen extends StatefulWidget {
 }
 
 class _NewsScreenState extends State<NewsScreen> {
+  String category = "General", country = "USA";
   @override
   void initState() {
     super.initState();
@@ -19,6 +21,13 @@ class _NewsScreenState extends State<NewsScreen> {
   @override
   Widget build(BuildContext context) {
     var listViewModel = Provider.of<NewsArticleListViewModel>(context);
+    void setCategoryCountry() {
+      listViewModel.topCountryCategoryHeadlines(
+        category: Constants.Categories[category],
+        country: Constants.Countries[country],
+      );
+    }
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -45,7 +54,36 @@ class _NewsScreenState extends State<NewsScreen> {
             ],
           ),
           actions: <Widget>[
-            Icon(Icons.more_vert),
+            PopupMenuButton(
+              onSelected: (cat) {
+                category = cat;
+                setCategoryCountry();
+              },
+              icon: Icon(Icons.category),
+              itemBuilder: (_) {
+                return Constants.Categories.keys
+                    .map((v) => PopupMenuItem(
+                          value: v,
+                          child: Text(v),
+                        ))
+                    .toList();
+              },
+            ),
+            PopupMenuButton(
+              onSelected: (con) {
+                country = con;
+                setCategoryCountry();
+              },
+              icon: Icon(Icons.flag),
+              itemBuilder: (_) {
+                return Constants.Countries.keys
+                    .map((v) => PopupMenuItem(
+                          value: v,
+                          child: Text(v),
+                        ))
+                    .toList();
+              },
+            ),
           ],
         ),
         body: NewsGrid(
