@@ -3,7 +3,11 @@ import 'package:mvvm_news_flutter/models/newsarticle.dart';
 import 'package:mvvm_news_flutter/services/web_service.dart';
 import 'package:mvvm_news_flutter/viewmodels/news_articles_vm.dart';
 
-enum LoadingStatus { completed, searching, empty }
+enum LoadingStatus {
+  completed,
+  searching,
+  empty,
+}
 
 class NewsArticleListViewModel with ChangeNotifier {
   List<NewsArticleViewModel> articles = List.empty(
